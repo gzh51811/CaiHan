@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>YiGuo商品列表</title>
+  <link rel="stylesheet" href="../css/shade.css">
+  <link rel="stylesheet" href="../layui/css/layui.css">
+  <script type="text/javascript" src="../layui/layui.js">
+  </script>
+  <script type="text/javascript" src="../js/common.js"></script>
+  <script type="text/javascript" src="../js/jquery-1.10.1.min.js">
+       
+  </script>
+  <script type="text/javascript" src="../js/public.js"></script>
+</head>
+<body class="layui-layout-body">
+<!-- -----------------------编辑用户信息--------------- -->
+<div class="goodEdit">
+    <!-- <div class="goodEditTop">
+        <p>编辑商品信息</p>
+        <div class="goodsCloses">
+          x
+        </div>
+    </div>
+  <div class="goodEditBottom">
+       <div class="EditConnect">
+          <p class='EditName'>商品名称&nbsp;：<span>香梨</span></p>
+          <p class='EditClass'>商品分类&nbsp;：<span>国产水果</span></p>
+          <p class='EditOldPrice'>商品原价&nbsp;：<span>30</span></p>
+          <p class='EditNewPrice'>商品现价&nbsp;：<input type="text" placeholder="20" class='priceEdit'></p>
+          <p class='EditStock'>商品库存&nbsp;：<input type="text" placeholder="100" class='stcokEdit'></p>
+          <p class='Edittime'>添加时间&nbsp;：<span>2018.02.10</span></p>
+       </div>
+        <div class="layui-form-item" style='padding-top: 20px;'>
+          <div class="layui-input-block">
+            <button class="layui-btn" >确定修改</button>
+          </div>
+        </div>
+  </div> -->
+</div>
+
+
+
+<div class="layui-layout layui-layout-admin goodsListOpacity">
+  <div class="layui-header">
+    <div class="layui-logo">YiGuo后台管理</div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <ul class="layui-nav layui-layout-left">
+      <li class="layui-nav-item"><a href="">控制台</a></li>
+      <li class="layui-nav-item"><a href="">商品管理</a></li>
+      <li class="layui-nav-item"><a href="">用户</a></li>
+      <li class="layui-nav-item">
+        <a href="javascript:;">其它系统</a>
+        <dl class="layui-nav-child">
+          <dd><a href="">邮件管理</a></dd>
+          <dd><a href="">消息管理</a></dd>
+          <dd><a href="">授权管理</a></dd>
+        </dl>
+      </li>
+    </ul>
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a href="javascript:;">
+          <i class="layui-icon" style='padding-right: 10px;'>&#xe770;</i>
+          <span>贤心</span>
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="">基本资料</a></dd>
+          <dd><a href="">安全设置</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item outName"><a href="">退了</a></li>
+    </ul>
+  </div>
+  
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        <li class="layui-nav-item layui-nav-itemed">
+          <a class="" href="javascript:;">商品管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="goodsList.html">商品列表</a></dd>
+            <dd><a href="goodsCategory.html">商品分类</a></dd>
+            <dd><a href="addGoods.html">添加商品</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item">
+          <a href="javascript:;">用户管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="userList.html">用户列表</a></dd>
+            <dd><a href="addUsers.html">添加用户</a></dd>
+          </dl>
+        </li>
+         <li class="layui-nav-item">
+          <a href="javascript:;">订单管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="orderList.html">订单列表</a></dd>
+          </dl>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+    <div class="layui-body">
+    <!-- 内容主体区域开始 -->
+       <div style="padding: 30px 0 0 30px;">
+            <button class="layui-btn addBtn ">
+                        <i class="layui-icon">&#xe608;</i> 添加
+            </button>
+            <button class="layui-btn allDel">
+                        <i class="layui-icon">&#xe640;</i> 删除
+            </button>
+            <table class="layui-table" style='width:900px;margin-top: 20px;'>
+              <thead>
+                <tr>
+                  <th style="width:20px; text-align:center;">
+                    <input type="checkbox" name=""  lay-skin="primary" id='checkedAll'>
+                  </th>
+                  <th style="width:30px;text-align:center;">ID</th>
+                  <th style='width:80px;text-align:center;'>商品名称</th>
+                  <th style='width:130px;text-align:center;'>分类</th>
+                  <th style='width:80px;text-align:center;'>原价</th>
+                  <th style='width:80px;text-align:center;'>现价</th>
+                  <th style='width:80px;text-align:center;'>库存</th>
+                  <th style='width:160px;text-align:center;'>添加时间</th>
+                  <th style='width:190px;text-align:center;'>操作</th>
+                </tr> 
+              </thead>
+              <tbody>
+<!--                 <tr>
+                  <td >
+                    <input type="checkbox" name="" title="写作" lay-skin="primary" >
+                  </td>
+                  <td style='text-align: center;'>01</td>
+                  <td style='text-align: center;'>香梨</td>
+                  <td style='text-align: center;'>国产水果</td>
+                  <td style='text-align: center;'>30</td>
+                  <td style='text-align: center;'>28</td>
+                  <td style='text-align: center;'>400</td>
+                  <td style='text-align: center;'>time</td>
+                  <td>
+                      <button class="layui-btn layui-btn-sm" style='margin-left: 15px;'>
+                        <i class="layui-icon">&#xe642;</i>
+                      </button>
+                      <button class="layui-btn layui-btn-sm">
+                        <i class="layui-icon">&#xe640;</i>
+                      </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td >
+                    <input type="checkbox" name="" title="" lay-skin="primary" >
+                  </td>
+                  <td style='text-align: center;'>01</td>
+                  <td style='text-align: center;'>香梨</td>
+                  <td style='text-align: center;'>国产水果</td>
+                  <td style='text-align: center;'>30</td>
+                  <td style='text-align: center;'>28</td>
+                  <td style='text-align: center;'>400</td>
+                  <td style='text-align: center;'>time</td>
+                  <td>
+                      <button class="layui-btn layui-btn-sm" style='margin-left: 15px;'>
+                        <i class="layui-icon">&#xe642;</i>
+                      </button>
+                      <button class="layui-btn layui-btn-sm">
+                        <i class="layui-icon">&#xe640;</i>
+                      </button>
+                  </td>
+                </tr> -->
+              </tbody>
+            </table>
+            
+       </div>
+  </div>
+    <!-- 内容主体区域结束 -->
+  
+  <div class="layui-footer" style='background: #009688;color:#fff;height: 20px;line-height: 20px;font-size: 12px;'>
+    <!-- 底部固定区域 -->
+    © YiGuo.com - 易果生鲜 - 商品列表
+  </div>
+</div>
+<!-- 遮罩 -->
+
+ <!-- <div class='categoryShade editCategory' >
+    <div class="categoryTop">
+      <p>编辑分类</p>
+      <div class="categoryClose">
+        x
+      </div>
+    </div>
+    <div class="categoryBottom">
+        <div class="categoryBox">
+           <p class='listName'>分类名：<input type="text" name="" class="editTxt" id="" placeholder="输入分类名"></p>
+           <button class="layui-btn AlertBtn" style='margin:20px 0 0 58px' id="editAlterBtn" >
+               确认
+             </button>
+        </div>
+     </div>
+</div> -->
+
+</body>
+<script>
+  //JavaScript代码区域
+  layui.use('element', function(){
+    var element = layui.element;
+    
+  });
+
+  //Demo
+  layui.use('form', function(){
+    var form = layui.form;
+    
+    //监听提交
+    form.on('submit(formDemo)', function(data){
+      layer.msg(JSON.stringify(data.field));
+      return false;
+    });
+  });
+//用户名渲染
+// let users = localStorage.getItem('users');
+// console.log(JSON.parse(users).name);
+// let _name=JSON.parse(users).name;
+// showUsername(_name);
+// //用户退出
+// outUsername(_name);
+
+//====================================================
+  let layuiLayout = document.querySelector('.layui-layout');
+  var categoryShade = document.querySelector('.categoryShade');
+  $(function(){
+        //渲染页面
+    var url='/goods/_findAll';
+    findAll(show);
+
+//全选、不选、删除总键----------------------------
+ $('#checkedAll').on('click', function () {
+      if ($(this).prop('checked')) {
+           $('.onechecked').prop('checked', 'checked');
+      } else {
+           $('.onechecked').removeAttr('checked');
+      };
+      }); 
+ // 删除
+ $('.allDel').on('click',function(){
+        $("input:checkbox:checked").each(function() {
+          var currentAllTr
+              $(this).parent().parent().remove();
+              currentAllTr = $(this).parent().parent();
+              //console.log(currentAllTr);
+              // 获取点击对象id
+              var currentAllId = currentAllTr.attr('data-id');
+              //  console.log(currentAllId);//获取点击对应对象id
+              let xhr = new XMLHttpRequest();
+              xhr.onload = () =>{
+                // let res = JSON.parse(xhr.responseText);
+              }
+              xhr.open('post','/goods/del',true);
+              xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+              let daTa = `_id=${currentAllId}`
+              xhr.send(daTa);
+              });
+              var resDels = confirm('你确定要删除？');
+              if(resDels){
+                currentAllTr.remove();
+              }
+        });
+    //渲染页面结构的封装
+    function show(str){
+      var res=str.map(function(item,idx){
+        var newDate = new Date(item.data*1);
+        // console.log(newDate);
+        return `<tr data-id="${item._id}">
+                  <td >
+                    <input type="checkbox" name="" title="写作" lay-skin="primary" class='onechecked'>
+                  </td>
+                  <td style='text-align: center;'>${idx+1}</td>
+                  <td style='text-align: center;'>${item.name}</td>
+                  <td style='text-align: center;'>${item.category}</td>
+                  <td style='text-align: center;'>${item.before_price}</td>
+                  <td style='text-align: center;'>${item.now_price}</td>
+                  <td style='text-align: center;'>${item.stock}</td>
+                  <td style='text-align: center;'>${newDate}</td>
+                  <td>
+                      <button class="layui-btn layui-btn-sm editBtn" style='margin-left: 15px;'>
+                        <i class="layui-icon">&#xe642;</i>
+                      </button>
+                      <button class="layui-btn layui-btn-sm delBtn">
+                        <i class="layui-icon">&#xe640;</i>
+                      </button>
+                  </td>
+                </tr>`;    
+      }).join('');
+      $('tbody').html(res);
+      //======================================
+      //删除单条数据ajax请求
+      $('.delBtn').on('click',function(){
+        // console.log($(this))
+        var currentTr=$(this).parent().parent();
+        // console.log(currentTr);
+        var currentId=currentTr.attr('data-id');
+        //向后端传送的数据
+        var data={_id:currentId};
+        _delete(data,show);
+        // 
+      }); 
+      
+      
+//-------------编辑弹窗----------------------------
+    $('.editBtn').on('click',function(){//出现弹窗
+          var currentTTr = $(this).parent().parent();
+          //console.log(currentTTr);
+          //获取当前点击对象的id
+          var currentIId = currentTTr.attr('data-id');
+          // console.log(currentIId);
+          let xhr = new XMLHttpRequest();
+          xhr.onload = () =>{
+              let res = JSON.parse(xhr.responseText);
+              // console.log(res);
+              numUpdate(res);
+//---------------点击修改的确定按钮，把数据传输到后台----------------------------------
+          $('.modify').on('click',function(){
+            let priceEdit = document.querySelector('.priceEdit');
+            let stcokEdit = document.querySelector('.stcokEdit');
+            let _priceEdit = priceEdit.value;
+            let _stcokEdit = stcokEdit.value;
+            // console.log(_stcokEdit)
+                //  console.log(111);
+                let xhr = new XMLHttpRequest();
+                xhr.onload = () =>{
+                  let res = JSON.parse(xhr.responseText);
+                }
+                xhr.open('post','/goods/_All',true);
+                xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+                let data = `_id=${currentIId}&now_price=${_priceEdit}&stock=${_stcokEdit}`;
+                xhr.send(data);
+                location.reload();
+              })
+
+//-------------------关闭弹窗----------------------------------------------------------
+              $('.goodsCloses').on('click',function(){//关闭弹窗
+              $('.goodEdit').css('display','none');
+              $('.goodsListOpacity').css('opacity','1');
+      });
+          }
+          xhr.open('post','/goods/All',true);
+          xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+          let data = `_id=${currentIId}`;
+          xhr.send(data);
+          $('.goodEdit').css('display','block');
+          $('.goodsListOpacity').css('opacity','0.7');
+      });
+      
+      function numUpdate(res){
+        let goodEdit = document.querySelector('.goodEdit');
+          var numUpdate = res.map(function(item){
+            return `
+            <div class="goodEditTop">
+              <p>编辑商品信息</p>
+              <div class="goodsCloses">
+                x
+              </div>
+          </div>
+        <div class="goodEditBottom">
+            <div class="EditConnect">
+                <p class='EditName'>商品名称&nbsp;：<span>${item.name}</span></p>
+                <p class='EditClass'>商品分类&nbsp;：<span>${item.category}</span></p>
+                <p class='EditOldPrice'>商品原价&nbsp;：<span>${item.before_price}</span></p>
+                <p class='EditNewPrice'>商品现价&nbsp;：<input type="text" value="${item.now_price}" class='priceEdit'></p>
+                <p class='EditStock'>商品库存&nbsp;：<input type="text" value="${item.stock}" class='stcokEdit'></p>
+            </div>
+              <div class="layui-form-item" style='padding-top: 20px;'>
+                <div class="layui-input-block">
+                  <button class="layui-btn modify" >确定修改</button>
+                </div>
+              </div>
+        </div>
+            `
+          }).join('');
+          goodEdit.innerHTML = numUpdate;
+      }
+     
+  }
+
+
+
+
+  //点击添加，到添加页面
+  $('.addBtn').on('click',function(){
+    location.href='addGoods.html?';
+  });
+    //==================================================
+    //=====================ajax的封装===================
+//1.查询所有的商品分类
+//参数：show是要渲染页面的函数
+//      url:查询所有数据的路由
+function findAll(fn){
+     $.ajax({
+        type:'get',
+        url:'/goods/_findAll',
+        data:{},
+        async:true,
+        success:function(str){
+            fn(str);
+        }
+     });   
+}
+
+
+//2.查询单条数据,再执行相应的操作
+//参数val:查询的值
+//      fun:data是函数要传到后端的值，是一个对象
+//      fun2:渲染数据结构的函数，在这里，所有渲染数据结构的函数名都是show
+function findOne(val,fun,data,fun2){
+    $.ajax({
+        type:'get',
+        url:'/goods/_find',
+        data:{
+          category:val,
+        },
+        async:true,
+        success:function(str){
+          if(str=='1'){
+            fun(data,fun2);
+          }else{
+            alert('商品分类名已存在');
+          }
+        }
+    });
+}
+
+
+//3.增加数据（增加后渲染页面）
+//参数：data:商品分类的值,是一个对象,格式data={name:xiao,age:18}
+//      fun2:渲染数据结构的函数，在这里，所有渲染数据结构的函数名都是show
+//      url:查询所有数据的路由
+ function add(data,fun){
+
+       //ajax请求
+       $.ajax({
+          type:'get',
+          url:'/goods/_add',
+          data:data,
+          async:true,
+          success:function(str){
+              // console.log(str);
+              // var res=JSON.parse(str);
+              if(str.n=='1'){
+                //渲染页面
+                findAll(fun);
+              }else{
+                alert('增加失败');
+              }
+          }
+       });   
+      
+}
+
+
+//修改数据
+//参数：data:修改前和修改后的值的集合，是一个对象
+//      fun:渲染数据结构的函数，在这里，所有渲染数据结构的函数名都是show
+//      url1:更新路由
+//      url2:查询所有数据的路由
+function update(data,fun){
+  $.ajax({
+    type:'get',
+    url:'/goods/_update',
+    data:data,
+    async:true,
+    success:function(str){
+        // console.log(str);
+        // 更新成功，重新渲染
+        if(str.n==1){
+          findAll(fun);
+        }
+    }
+  });
+}
+
+
+//删除数据
+//参数：data:修改前和修改后的值的集合，是一个对象
+//      fun:渲染数据结构的函数，在这里，所有渲染数据结构的函数名都是show
+//      url:查询所有数据的路由
+  function _delete(data,fun){
+      $.ajax({
+        type:'get',
+        url:'/goods/_delete',
+        data:data,
+        async:true,
+        success:function(str){
+            // console.log(str);
+            // 删除数据
+            if(str.n==1){
+              // currentTr.remove();
+              findAll(fun);
+
+            }
+        }
+      });
+  }
+  // 通过cookie设置头部的用户名显示,如果不是登录状态，都跳转到登陆页面
+login();
+ //点击Logo跳转到首页
+  index();
+  })
+</script>
+
+</html>

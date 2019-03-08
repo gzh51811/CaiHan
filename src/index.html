@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>layout 后台大布局 - Layui</title>
+  
+  <!-- <style type="text/css">
+  .layui-body{
+    background: url(img/9288737453319771.jpg);
+  }
+  </style> -->
+  <link rel="stylesheet" href="layui/css/layui.css">
+  <script type="text/javascript" src="layui/layui.js"></script>
+  <script type="text/javascript" src="js/common.js">
+       
+  </script>
+  <script type="text/javascript" src="js/public.js">
+       
+  </script>
+  
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo">YiGuo后台管理</div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <ul class="layui-nav layui-layout-left">
+      <li class="layui-nav-item"><a href="">控制台</a></li>
+      <li class="layui-nav-item"><a href="">商品管理</a></li>
+      <li class="layui-nav-item"><a href="">用户</a></li>
+      <li class="layui-nav-item">
+        <a href="javascript:;">其它系统</a>
+        <dl class="layui-nav-child">
+          <dd><a href="">邮件管理</a></dd>
+          <dd><a href="">消息管理</a></dd>
+          <dd><a href="">授权管理</a></dd>
+        </dl>
+      </li>
+    </ul>
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a href="javascript:;">
+          <i class="layui-icon" style='padding-right: 10px;'>&#xe770;</i>
+          <span>贤心</span>
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="">基本资料</a></dd>
+          <dd><a href="">安全设置</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item outName" ><a href="">退了</a></li>
+    </ul>
+  </div>
+  
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        <li class="layui-nav-item layui-nav-itemed">
+          <a class="" href="javascript:;">商品管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="html/goodsList.html">商品列表</a></dd>
+            <dd><a href="html/goodsCategory.html">商品分类</a></dd>
+            <dd><a href="html/addGoods.html">添加商品</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item">
+          <a href="javascript:;">用户管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href='html/userList.html'>用户列表</a></dd>
+            <dd><a href="html/addUsers.html">添加用户</a></dd>
+          </dl>
+        </li>
+         <li class="layui-nav-item">
+          <a href="javascript:;">订单管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="html/orderList.html">订单列表</a></dd>
+          </dl>
+        </li>
+       <!--  <li class="layui-nav-item"><a href="">云市场</a></li>
+        <li class="layui-nav-item"><a href="">发布商品</a></li> -->
+      </ul>
+    </div>
+  </div>
+  
+  <div class="layui-body" style="background: url(img/9288737453319771.jpg);bottom: 0px; ">
+    <!-- 内容主体区域 -->
+    <div style="padding:15px;"></div>
+  </div>
+  
+  <div class="layui-footer" style='background: #009688;color:#fff;height: 20px;line-height: 20px;font-size: 12px;'>
+    <!-- 底部固定区域 -->
+    © YiGuo.com - 易果生鲜 - 首页
+  </div>
+</div>
+
+<script>
+//JavaScript代码区域
+layui.use('element', function(){
+  var element = layui.element;
+  
+});
+// ======================================
+// 通过cookie设置头部的用户名显示,如果不是登录状态，都跳转到登陆页面
+
+let users = localStorage.getItem('users');
+  // console.log(JSON.parse(users).name);
+  if(users){
+    let _name=JSON.parse(users).name;
+    showUsername(_name);
+    //用户退出
+    outUsername(_name);
+  }else{
+    location.href="html/login.html";
+  }
+
+
+
+//===========================================
+
+
+
+</script>
+</body>
+</html>

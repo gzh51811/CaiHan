@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>YiGuo用户列表</title>
+  <link rel="stylesheet" href="../layui/css/layui.css">
+  <link rel="stylesheet" href="../css/shade.css">
+  <script src="../js/jquery-1.10.1.min.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/public.js"></script>
+  <script type="text/javascript" src="../layui/layui.js"></script>
+</head>
+
+<body class="layui-layout-body">
+  <!-- 遮罩 -->
+  <!-- 普通用户 -->
+<div class='userShade'>
+    <div class="userTop">
+      <p>编辑用户信息</p>
+      <div class="userClose">
+        x
+      </div>
+    </div>
+    <div class="userBottom">
+        <div class="userBox">
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-block">
+                  <input type="text" name="title" required  lay-verify="required" placeholder="修改用户名" autocomplete="off" class="layui-input" style='width:200px;'>
+                </div>
+              </div>
+           <button class="layui-btn" style='margin:10px 0 0 108px' id = 'userBtn'>
+               确认
+             </button>
+        </div>
+     </div>
+</div>
+<!-- 管理用户 -->
+<div class='usersShade adEditAlter'>
+    <div class="userTop">
+      <p>编辑用户信息</p>
+      <div class="userCloses adminCloses">
+        x
+      </div>
+    </div>
+    <div class="userBottom">
+        <div class="userBox">
+          <!-- 用户名 -->
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-block">
+                  <input type="text" name="title" required  lay-verify="required" placeholder="修改用户名" autocomplete="off" class="layui-input" id="AlterNameU" style='width:200px;'>
+                </div>
+               
+             </div>
+            <!--  -->
+            <div class="layui-form-item">
+                <label class="layui-form-label" >角色管理</label>
+                <div class="layui-input-block" style='width:500px'>
+                  <select name="city" lay-verify="required"  style='width:150px;height:30px;border:1px solid #ccc' id="AlterIdentU">
+                    <option value=""></option>
+                    <option value="0">管理员</option>
+                    <option value="1">普通用户</option>
+                  </select>
+                </div>
+              </div>
+        <button class="layui-btn" style='margin:10px 0 0 108px' id = 'adminBtn'>
+               确认
+        </button>
+     </div>
+</div>
+</div>
+
+
+
+
+  <div class="layui-layout layui-layout-admin userListOpacity">
+    <div class="layui-header">
+      <div class="layui-logo">YiGuo后台管理</div>
+      <!-- 头部区域（可配合layui已有的水平导航） -->
+      <ul class="layui-nav layui-layout-left">
+        <li class="layui-nav-item">
+          <a href="">控制台</a>
+        </li>
+        <li class="layui-nav-item">
+          <a href="">商品管理</a>
+        </li>
+        <li class="layui-nav-item">
+          <a href="">用户</a>
+        </li>
+        <li class="layui-nav-item">
+          <a href="javascript:;">其它系统</a>
+          <dl class="layui-nav-child">
+            <dd>
+              <a href="">邮件管理</a>
+            </dd>
+            <dd>
+              <a href="">消息管理</a>
+            </dd>
+            <dd>
+              <a href="">授权管理</a>
+            </dd>
+          </dl>
+        </li>
+      </ul>
+      <ul class="layui-nav layui-layout-right">
+        <li class="layui-nav-item">
+          <a href="javascript:;">
+              <i class="layui-icon" style='padding-right: 10px;'>&#xe770;</i> 
+              <span>贤心</span>
+          </a>
+          <dl class="layui-nav-child">
+            <dd>
+              <a href="">基本资料</a>
+            </dd>
+            <dd>
+              <a href="">安全设置</a>
+            </dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item outName">
+          <a href="">退了</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+      <div class="layui-side-scroll">
+        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+        <ul class="layui-nav layui-nav-tree" lay-filter="test">
+          <li class="layui-nav-item ">
+            <a class="" href="javascript:;">商品管理</a>
+            <dl class="layui-nav-child">
+              <dd>
+                <a href="goodsList.html">商品列表</a>
+              </dd>
+              <dd>
+                <a href="goodsCategory.html">商品分类</a>
+              </dd>
+              <dd>
+                <a href="addGoods.html">添加商品</a>
+              </dd>
+              <!-- <dd><a href="">超链接</a></dd> -->
+            </dl>
+          </li>
+          <li class="layui-nav-item layui-nav-itemed">
+            <a href="javascript:;">用户管理</a>
+            <dl class="layui-nav-child">
+              <dd>
+                <a href="userList.html">用户列表</a>
+              </dd>
+              <dd>
+                <a href="addUsers.html">添加用户</a>
+              </dd>
+            </dl>
+          </li>
+          <li class="layui-nav-item">
+            <a href="javascript:;">订单管理</a>
+            <dl class="layui-nav-child">
+              <dd>
+                <a href="orderList.html">订单列表</a>
+              </dd>
+            </dl>
+          </li>
+          <!--  <li class="layui-nav-item"><a href="">云市场</a></li>
+                      <li class="layui-nav-item"><a href="">发布商品</a></li> -->
+        </ul>
+      </div>
+    </div>
+    <div class="layui-body">
+      <!-- 右侧内容 -->
+      <div style='margin:40px 0 0 50px'>
+        <button class="layui-btn userAdd">
+            <i class="layui-icon">&#xe608;</i> 添加
+        </button>
+        <button class="layui-btn allDel" style='background: #fff;color:black;border:1px solid #ccc'>
+            <i class="layui-icon">&#xe640;</i> 删除
+          </button>
+          <table class="layui-table" style="width:630px;margin-top: 30px">
+              <thead>
+                <tr>
+                  <th ><input type="checkbox" name="" lay-skin="primary" style='width:50px;cursor: pointer;' id='checkedAll'> </th>
+                  <th style="width:200px;text-align: center">用户名</th>
+                  <th style="width:50px;text-align: center">性别</th>
+                  <th style="width:100px;text-align: center">用户权限</th>
+                  <th style="width:160px;text-align: center">操作</th>
+                </tr> 
+              </thead>
+              <tbody class='userListTable'>
+                  <!-- <tr>
+                      <td><input type="checkbox" name="" lay-skin="primary"style='width:50px;cursor: pointer;'> </td>
+                      <td>2016-11-29</td>
+                      <td style="text-align: center">女</td>
+                      <td style="text-align: center">普通用户</td>
+                      <td>
+                        <button class="layui-btn layui-btn-sm" style='margin-left: 20px'>
+                          <i class="layui-icon">&#xe642;</i>
+                        </button>
+                        <button class="layui-btn layui-btn-primary layui-btn-sm" >
+                            <i class="layui-icon">&#xe640;</i>
+                          </button>
+                      </td>
+                    </tr> -->
+              </tbody>
+            </table>
+    </div>
+    </div>
+
+
+    <script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+      var element = layui.element;
+      
+    });
+    
+    //Demo
+    layui.use('form', function(){
+      var form = layui.form;
+      
+      //监听提交
+      form.on('submit(formDemo)', function(data){
+        layer.msg(JSON.stringify(data.field));
+        return false;
+      });
+    });
+//用户名渲染
+
+    //单行删除
+    let xhr  = new XMLHttpRequest();
+    xhr.onload = () =>{
+      let res = JSON.parse(xhr.responseText);
+      // console.log(res);
+      userTable(res);//渲染页面
+//---------------编辑出现弹窗----------------------------------------
+       // editAter(); 
+        
+          
+
+//--------------------编辑修改信息--------------------------
+let users = localStorage.getItem('users');
+  // console.log(JSON.parse(users).name);
+  if(users){
+    let _name=JSON.parse(users).name;
+    showUsername(_name);
+    //用户退出
+    outUsername(_name);
+     var data={name:_name};
+        // console.log(data);
+        // 查询登录用户的身份，身份不同，功能不同
+        findOne(data,identity);
+        //管理员的编辑功能，先查询再修改（用户名是唯一的）
+  }else{
+    location.href="login.html";
+  }
+       
+
+
+
+        
+
+      
+    };
+
+
+    //管理员的修改功能
+    
+    //-----------删除当行封装-----------------------------------------
+        function delOne(){
+            $('.userDel').on('click',function(){
+            var currentTr = $(this).parent().parent();
+            // 获取点击对象id
+            var currentId = currentTr.attr('data-id');
+            // console.log(currentId);
+            let xhr = new XMLHttpRequest();
+            xhr.onload = () =>{
+              // let res = JSON.parse(xhr.responseText);
+            }
+            xhr.open('post','/user/del',true);
+            xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+            let daTa = `_id=${currentId}`;
+            xhr.send(daTa);
+            var resDel = confirm('你确定要删除？');
+             //console.log(currentId);
+             if(resDel){
+              currentTr.remove();
+             }
+            
+              
+          })
+        }
+//---------------------------------------------------------------------------
+function delMany(){
+    //----------全选、不选---------------------------------------
+      $('#checkedAll').on('click', function () {
+              if ($(this).prop('checked')) {
+                  $('.onechecked').prop('checked', 'checked');
+              } else {
+                  $('.onechecked').removeAttr('checked');
+              };
+          }); 
+//---------勾选删除全删------------------------------------------
+
+      $('.allDel').on('click',function(){
+            var currentAllTr;
+        $("input:checkbox:checked").each(function() {
+            $(this).parent().parent().remove();
+            currentAllTr = $(this).parent().parent();
+            // 获取点击对象id
+            var currentAllId = currentAllTr.attr('data-id');
+            //  console.log(currentAllId);//获取点击对应对象id
+            let xhr = new XMLHttpRequest();
+            xhr.onload = () =>{
+              // let res = JSON.parse(xhr.responseText);
+        }
+            xhr.open('post','/user/del',true);
+            xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+            let daTa = `_id=${currentAllId}`;
+            xhr.send(daTa);
+            });
+            var resDels = confirm('你确定要删除？');
+            if(resDels){
+              currentAllTr.remove();
+              // userTable(res);
+              
+            }
+        });
+}
+
+
+    xhr.open('get','/user/all',true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+    xhr.send();
+    
+
+
+    //数据渲染
+    let userListTable = document.querySelector('.userListTable');
+    function userTable(res){
+        var tableRes = res.map(function(item){
+          return`
+          <tr data-id=${item._id}>
+                      <td><input type="checkbox" name="" lay-skin="primary"style='width:50px;cursor: pointer;' class='onechecked'> </td>
+                      <td>${item.name}</td>
+                      <td style="text-align: center">${item.sex}</td>
+                      <td style="text-align: center">${item.identity}</td>
+                      <td>
+                        <button class="layui-btn layui-btn-sm userEdit" style='margin-left: 20px'>
+                          <i class="layui-icon">&#xe642;</i>
+                        </button>
+                        <button class="layui-btn layui-btn-primary layui-btn-sm userDel" >
+                            <i class="layui-icon">&#xe640;</i>
+                          </button>
+                      </td>
+                    </tr>
+          `
+        }).join('');
+        userListTable.innerHTML = tableRes;
+    }
+     //普通用户的修改弹窗
+     function generalEditAter(){
+            // 要根据是普通用户还是管理员用户进行筛选判断
+           $('.userEdit').on('click',function(){
+              //普通用户
+              $('.userShade').css('display','block');
+              $('.userListOpacity').css('opacity','0.75');
+           
+            });
+            $('.userClose').on('click',function(){
+              //普通用户
+              $('.userShade').css('display','none');
+              $('.userListOpacity').css('opacity','1');
+             
+            });
+        }
+
+    //管理员的修改弹窗
+    function admin(){
+      // 要根据是普通用户还是管理员用户进行筛选判断
+       $('.userEdit').on('click',function(){
+          //管理员用户
+          $('.adEditAlter').css('display','block');
+          $('.userListOpacity').css('opacity','0.75');
+          //拿到当前的用户名值
+          var currentname=$(this).parent().parent().children('td').eq(1).text();
+          var identify=$(this).parent().parent().children('td').eq(3).text();
+          // console.log(identify);
+          //赋值
+          $('#AlterNameU').val(currentname);
+          // console.log($('#AlterIdentU').children())
+          $('#AlterIdentU').children().eq(0).text(identify);
+          //注意点：下拉框被选中，遍历所有下拉框的内容，如果有内容=='管理员'，则给当前的opaction增加被选中的样式
+          for(var i=0;i<$('#AlterIdentU').children().length;i++){
+            var val=$('#AlterIdentU').children().eq(i).text();
+            if(val==identify){
+              $('#AlterIdentU').children().eq(i).attr('selected','selected');
+            }
+          }
+          $('#adminBtn').on('click',function(){
+            var data={name:currentname};
+            findOne(data,text);
+          });
+          // $('')
+          function text(){
+            console.log(11);
+          }
+        });
+        $('.adminCloses').on('click',function(){
+          //管理员用户
+          $('.adEditAlter').css('display','none');
+          $('.userListOpacity').css('opacity','1');
+        });
+    }
+    //查询数据是管理员或者是普通用户后的操作
+    function identity(str){
+      if(str=='管理员'){
+        //登录的是管理员
+          $('.userAdd').on('click',function(){
+          // 要做判断（是否为管理员身份）
+          location.href='addUsers.html';
+          //管理员身份才能删除
+          
+        });
+          //删除一条数据
+          delOne();
+          //修改
+          admin();
+          //删除多条数据
+          delMany();
+      }else{
+        //登录的是普通用户
+        $('.userAdd').on('click',function(){
+          // 要做判断（是否为管理员身份）
+           alert('你没有权限');
+        });
+        //====点击删除====
+        $('.userDel').on('click',function(){
+          alert('你没有权限');
+        });
+        //====修改======
+        generalEditAter();
+        //点击删除多行
+        $('.allDel').on('click',function(){
+          alert('你没有权限');
+        });
+      }
+    }
+    //2.查询单条数据,再执行相应的操作
+    //参数val:查询的值
+    //      fun:data是函数要传到后端的值，是一个对象
+    //      fun2:渲染数据结构的函数，在这里，所有渲染数据结构的函数名都是show
+    //      function findOne(val,fun,data,fun2){
+    function findOne(data,fun){
+      $.ajax({
+          type:'get',
+          url:'/user/_find',
+          data:data,
+          async:true,
+          success:function(str){
+            console.log(str);
+            fun(str);
+          }
+      });
+    }
+
+
+//修改数据
+//参数：data:修改前和修改后的值的集合，是一个对象
+//      fun:渲染数据结构的函数，在这里，所有渲染数据结构的函数名都是show
+//      url1:更新路由
+//      url2:查询所有数据的路由
+function update(data,fun){
+  $.ajax({
+    type:'get',
+    url:'/category/_update',
+    data:data,
+    async:true,
+    success:function(str){
+        // console.log(str);
+        // 更新成功，重新渲染
+        if(str.n==1){
+          findAll(fun);
+        }
+    }
+  });
+}
+// 通过cookie设置头部的用户名显示,如果不是登录状态，都跳转到登陆页面
+// login();
+ //点击Logo跳转到首页
+  index();
+    </script>
+</body>
+
+</html>

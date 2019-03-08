@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>YiGuo添加用户</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../js/jquery-1.10.1.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/public.js"></script>
+    <script type="text/javascript" src="../layui/layui.js"></script>
+</head>
+<body>
+        <div class="layui-layout layui-layout-admin">
+                <div class="layui-header">
+                  <div class="layui-logo">YiGuo后台管理</div>
+                  <!-- 头部区域（可配合layui已有的水平导航） -->
+                  <ul class="layui-nav layui-layout-left">
+                    <li class="layui-nav-item"><a href="">控制台</a></li>
+                    <li class="layui-nav-item"><a href="">商品管理</a></li>
+                    <li class="layui-nav-item"><a href="">用户</a></li>
+                    <li class="layui-nav-item">
+                      <a href="javascript:;">其它系统</a>
+                      <dl class="layui-nav-child">
+                        <dd><a href="">邮件管理</a></dd>
+                        <dd><a href="">消息管理</a></dd>
+                        <dd><a href="">授权管理</a></dd>
+                      </dl>
+                    </li>
+                  </ul>
+                  <ul class="layui-nav layui-layout-right">
+                    <li class="layui-nav-item">
+                      <a href="javascript:;">
+                          <i class="layui-icon" style='padding-right: 10px;'>&#xe770;</i>
+                          <span>贤心</span>
+                      </a>
+                      <dl class="layui-nav-child">
+                        <dd><a href="">基本资料</a></dd>
+                        <dd><a href="">安全设置</a></dd>
+                      </dl>
+                    </li>
+                    <li class="layui-nav-item outName"><a href="">退了</a></li>
+                  </ul>
+                </div>
+                
+                <div class="layui-side layui-bg-black">
+                  <div class="layui-side-scroll">
+                    <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                    <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                      <li class="layui-nav-item ">
+                        <a class="" href="javascript:;">商品管理</a>
+                        <dl class="layui-nav-child">
+                          <dd><a href="goodsList.html">商品列表</a></dd>
+                          <dd><a href="goodsCategory.html">商品分类</a></dd>
+                          <dd><a href="addGoods.html">添加商品</a></dd>
+                          <!-- <dd><a href="">超链接</a></dd> -->
+                        </dl>
+                      </li>
+                      <li class="layui-nav-item layui-nav-itemed">
+                        <a href="javascript:;">用户管理</a>
+                        <dl class="layui-nav-child">
+                          <dd><a href="userList.html">用户列表</a></dd>
+                          <dd><a href="addUsers.html">添加用户</a></dd>
+                        </dl>
+                      </li>
+                       <li class="layui-nav-item">
+                        <a href="javascript:;">订单管理</a>
+                        <dl class="layui-nav-child">
+                          <dd><a href="orderList.html">订单列表</a></dd>
+                        </dl>
+                      </li>
+                     <!--  <li class="layui-nav-item"><a href="">云市场</a></li>
+                      <li class="layui-nav-item"><a href="">发布商品</a></li> -->
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="layui-body">
+                  <!-- 右侧内容 -->
+      <div class="layui-form" style='padding: 70px 0 0 50px;'>
+        <div class="layui-form-item">
+          <label class="layui-form-label" >用户名</label>
+          <div class="layui-input-block" style='width:300px'>
+            <input type="text" name="title" required  lay-verify="required" placeholder="请输入需要添加的用户名" autocomplete="off" class="layui-input username">
+            <span class="invalid-feedback" style = 'color:red'></span>
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">密码</label>
+          <div class="layui-input-inline" style='width:300px'>
+            <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input password">
+          </div>
+        </div>
+        <div class="layui-form-item identify">
+          <label class="layui-form-label" >角色管理</label>
+          <div class="layui-input-block" style='width:300px'>
+            <select name="city" lay-verify="required">
+              <option value=""></option>
+              <option value="0">管理员</option>
+              <option value="1">普通用户</option>
+            </select>
+          </div>
+        </div>
+        <div class="layui-form-item userSex">
+          <label class="layui-form-label">性别</label>
+          <div class="layui-input-block">
+            <input type="radio" name="sex" value="男" title="男">
+            <input type="radio" name="sex" value="女" title="女" checked>
+          </div>
+        </div>
+        <div class="layui-form-item" style='padding-top: 20px'>
+          <div class="layui-input-block">
+            <button class="layui-btn submit" lay-submit >立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+          </div>
+        </div>
+    </div>
+     <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © layui.com - 底部固定区域
+      </div>
+</div>
+</div>
+      <script>
+     
+        //Demo
+        layui.use('form', function(){
+          var form = layui.form;
+          
+          //监听提交
+          form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            
+            return false;
+            
+          });
+        });
+//用户名渲染
+let users = localStorage.getItem('users');
+  // console.log(JSON.parse(users).name);
+  if(users){
+    let _name=JSON.parse(users).name;
+    showUsername(_name);
+    //用户退出
+    outUsername(_name);
+    var data={name:_name};
+  // console.log(data);
+  // 查询登录用户的身份，身份不同，功能不同
+  findOne(data);
+  }else{
+    location.href="login.html";
+  }
+ 
+//-----------------点击立即提交时把增加的用户数据传输到后台(要做是否为管理员判断)------------------------
+      function adduser(){
+        $('.submit').on('click',function(){
+          var _Identity=$('.identify').find(`.layui-anim dd`).filter('.layui-this').html();//获取身份
+                //console.log(Identity);
+          var _Sex=$('.userSex').find(`.layui-form-radioed div`).html();//获取性别
+            //console.log(Sex);
+          let _password = $('.password').val();
+          // console.log(_password);
+          let _username = $('.username').val();
+          // console.log(_username);
+          if(_username && _password && _Identity && _Sex){
+            let xhr = new XMLHttpRequest();
+            xhr.onload = () =>{
+              if (xhr.status == 200) {
+                // console.log(xhr.responseText)
+                 let res = JSON.parse(xhr.responseText);
+                 if (res.ok) {
+                   alert('用户添加成功！')
+                     location.href = 'userList.html'
+                }
+              }
+            }
+            xhr.open('post', '/user/add', true);
+                        //必须放在open后面 设置请求头(jQuery自动封装好的，不需要添加)
+                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                        let data = `name=${_username}&password=${_password}&identity=${_Identity}&sex=${_Sex}`
+                        xhr.send(data);
+                    } else {
+                        alert('请完善你的信息')
+                    }
+         }) ;
+      }
+     
+
+    
+    //  console.log($('.layui-form-radioed')); 
+//-----------------判断用户名是否存在
+       $('.username').on('blur',function(){
+          let username = document.querySelector('.username');
+          let _username = username.value;
+          let xhr = new XMLHttpRequest();
+          xhr.onload = () =>{
+            if (xhr.status == 200) {
+              if (xhr.responseText == 'no') {//用户名已存在
+                username.nextElementSibling.innerText = '用户名已存在';
+              } else {//用户名不存在
+                username.nextElementSibling.innerText = ''
+              }
+
+            }
+          }
+          xhr.open('get', `/user/check?name=${_username}`,true);
+          xhr.send();
+       });
+       //--------------------------------------------------------------
+       function findOne(data){
+        $.ajax({
+            type:'get',
+            url:'/user/_find',
+            data:data,
+            async:true,
+            success:function(str){
+              if(str=='管理员'){
+                //登录的是管理员
+                 adduser();
+              }else{
+                //登录的是普通用户
+               $('.submit').on('click',function(){
+                  // 要做判断（是否为管理员身份）
+                   alert('你没有权限');
+                });
+                
+              }
+            }
+        });
+    }
+  // 通过cookie设置头部的用户名显示,如果不是登录状态，都跳转到登陆页面
+  // login();
+   //点击Logo跳转到首页
+  index();
+//------------------
+//layui框架源码------------------------------------------
+        //Demo
+        layui.use('form', function(){
+          var form = layui.form;
+          
+          //监听提交
+          form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+          });
+        });
+        //--------------------------new Array(
+         //JavaScript代码区域
+          layui.use('element', function(){
+            var element = layui.element;
+            
+          });
+
+        </script>
+       
+</body>
+</html>
